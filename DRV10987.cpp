@@ -182,20 +182,19 @@ namespace drv10987 {
         Config5Reg config5;
         config5.hardwareCurrentLimit = Config5Reg::HardwareCurrentLimit_Range1_0_9A_Range2_3_2A;
         config5.hardwareCurrentLimitRange = Config5Reg::HardwareCurrentLimitRange2;
-        config5.softwareCurrentLimit = 0b0000;//0b1111;
-        config5.enableCurrentLimitLock = false;//false;
+        config5.softwareCurrentLimit = 0b0000;
+        config5.enableCurrentLimitLock = false;
         setConfig5(config5);
 
         Config6Reg config6;
         config6.openToClosedLoopMode = Config6Reg::OpenToClosedLoopMode_Transfer;
         config6.slewRate = Config6Reg::SlewRate_120V_us;
-        config6.inductiveAVSEnable = false;//true;//false;
+        config6.inductiveAVSEnable = false;
         config6.closedLoopAccelerate = Config6Reg::ClosedLoopAccelerate_0_045Vcc_s;
         setConfig6(config6);
 
         Config7Reg config7;
-        config7.driverDeadTime = config7.getDriverDeadTime(1080);//440);
-        //config7.scoreControlConstant = Config7Reg::SCOREControlConstant_0_25;
+        config7.driverDeadTime = config7.getDriverDeadTime(1080);
         setConfig7(config7);
 
         std::cout << "Loading shadow registers into EEPROM registers..." << std::endl;
@@ -221,10 +220,6 @@ namespace drv10987 {
 
         FaultReg fault = getFaultReg();
         std::cout << "Kt: " << kt << " spd: " << motorspd <<  " spdcmd: " << speed << " " << speedbuf << " " << getMotorCurrent().toString() << " " <<  fault.toString() << std::endl;
-
-        //if(fault.anyFault())
-        //    while(1);
-        //std::cout << getMotorCurrent().toString() << std::endl;
     }
 
     FaultReg DRV10987::getFaultReg(HAL_StatusTypeDef& i2cStatus) {
